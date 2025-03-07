@@ -10,7 +10,7 @@ type Props = {
 }
 
 export default async function SnippetPage(props: Props) {
-  console.log({props});
+  await new Promise(r => setTimeout(r, 3000));
 
   const { id } = await props.params;
 
