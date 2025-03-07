@@ -1,5 +1,6 @@
 import { db } from '@/db';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 
 type Params = {
   id: string;
@@ -10,12 +11,17 @@ type Props = {
 }
 
 export default async function SnippetPage(props: Props) {
-  await new Promise(r => setTimeout(r, 1500));
-
   const { id } = await props.params;
 
+  const snippetId = parseInt(id);
+
+  if (Number.isNaN(snippetId)) {
+    notFound();
+  }
+
+  await new Promise(r => setTimeout(r, 1500));
   const snippet = await db.snippet.findFirst({
-    where: { id: parseInt(id) },
+    where: { id: snippetId },
   });
 
   if (!snippet) {
@@ -27,7 +33,9 @@ export default async function SnippetPage(props: Props) {
       <div className="flex m-4 justify-between items-center">
         <h1 className="text-xl font-bold">{snippet.title}</h1>
         <div className="flex gap-2">
-          <button className="p-1 border rounded">Edit</button>
+          <Link
+            href={`/snippets/${snippetId}/edit`}
+            className="p-1 border rounded">Edit</Link>
           <button className="p-1 border rounded">Delete</button>
         </div>
       </div>
