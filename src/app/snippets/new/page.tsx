@@ -1,16 +1,10 @@
-'use client';
 import { createSnippet } from '@/server-actions';
-import { FormEventHandler, useCallback, useState } from 'react';
+import SubmitButton from '@/components/SubmitButton';
 
 export default function SnippetCreatePage() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(() => {
-    setIsSubmitting(true);
-  }, []);
 
   return (
-    <form action={createSnippet} onSubmit={onSubmit} id="create-snippet">
+    <form action={createSnippet} id="create-snippet">
       <h3 className="font-bold m3">Create a Snippet</h3>
       <div className="flex flex-col gap-4">
 
@@ -24,9 +18,7 @@ export default function SnippetCreatePage() {
           <textarea name="code" className="border rounded p-2 w-full" id="code"/>
         </div>
 
-        <button type="submit" className="rounded p-2 bg-blue-200" disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting' : 'Submit'}
-        </button>
+        <SubmitButton/>
       </div>
     </form>
   );
