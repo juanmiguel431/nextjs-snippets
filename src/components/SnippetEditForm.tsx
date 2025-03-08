@@ -39,7 +39,7 @@ export default function SnippetEditForm({ snippet }: Props) {
 
       <form action={editSnippetAction} className="mt-3">
         <Link
-          href="/"
+          href={`/snippets/${snippet.id}`}
           className="p-2 mr-3 rounded bg-gray-200 text-center"
         >
           Back
