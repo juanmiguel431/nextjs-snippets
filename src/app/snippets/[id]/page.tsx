@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import * as action from '@/server-actions';
 import SubmitButton from '@/components/SubmitButton';
+import React from 'react';
 
 type Params = {
   id: string;
@@ -38,13 +39,20 @@ export default async function SnippetPage(props: Props) {
         <h1 className="text-xl font-bold">{snippet.title}</h1>
         <div className="flex gap-2">
           <Link
+            href="/"
+            className="p-2 rounded bg-gray-200 text-center"
+          >
+            Back
+          </Link>
+
+          <Link
             href={`/snippets/${snippetId}/edit`}
-            className="p-1 border rounded">
+            className="p-2 rounded bg-gray-200">
             Edit
           </Link>
 
           <form action={deleteAction}>
-            <SubmitButton>Delete</SubmitButton>
+            <SubmitButton className="rounded p-2 bg-red-400">Delete</SubmitButton>
           </form>
         </div>
       </div>

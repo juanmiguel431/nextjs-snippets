@@ -2,10 +2,11 @@
 
 import { Snippet } from '@prisma/client';
 import Editor, { OnChange } from '@monaco-editor/react';
-import { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { editor } from 'monaco-editor';
 import * as action from '@/server-actions';
 import SubmitButton from '@/components/SubmitButton';
+import Link from 'next/link';
 
 type Props = Readonly<{
   snippet: Snippet
@@ -36,7 +37,14 @@ export default function SnippetEditForm({ snippet }: Props) {
         onChange={handleEditorChange}
       />
 
-      <form action={editSnippetAction}>
+      <form action={editSnippetAction} className="mt-3">
+        <Link
+          href="/"
+          className="p-2 mr-3 rounded bg-gray-200 text-center"
+        >
+          Back
+        </Link>
+
         <SubmitButton>Save</SubmitButton>
       </form>
     </div>

@@ -2,6 +2,7 @@
 import * as actions from '@/server-actions';
 import SubmitButton from '@/components/SubmitButton';
 import React, { startTransition, useActionState, useCallback } from 'react';
+import Link from 'next/link';
 
 export default function SnippetCreatePage() {
 
@@ -36,6 +37,7 @@ export default function SnippetCreatePage() {
         )}
 
         <SubmitButton/>
+        <Link href="/" className="p-2 rounded bg-gray-200 text-center">Back</Link>
       </div>
     </form>
   );

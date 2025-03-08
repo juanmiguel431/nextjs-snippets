@@ -28,7 +28,9 @@ export default async function SnippetEditPage(props: Props) {
 
   return (
     <div>
-      Editing Snippet with title {snippet.title}
+      <h2 className="mt-3 mb-3 text-2xl font-bold text-gray-800">
+        Editing Snippet with title {snippet.title}
+      </h2>
       <SnippetEditForm
         snippet={snippet}
       />
