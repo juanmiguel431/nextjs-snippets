@@ -25,3 +25,12 @@ export async function updateSnippet(id: number, code: string | undefined) {
 
   redirect(`/snippets/${id}`);
 }
+
+export async function deleteSnippet(id: number) {
+  await new Promise(r => setTimeout(r, 1500));
+  await db.snippet.delete({
+    where: { id: id },
+  });
+
+  redirect('/');
+}
