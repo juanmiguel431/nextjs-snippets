@@ -2,16 +2,45 @@
 import { db } from '@/db';
 import { redirect } from 'next/navigation';
 
-export async function createSnippet(formData: FormData) {
-  const title = formData.get('title') as string;
-  const code = formData.get('code') as string;
+type FormState = {
+  message: string;
+}
 
-  await new Promise(r => setTimeout(r, 1500));
-  const snippet = await db.snippet.create({
-    data: { title, code }
-  });
+export async function createSnippet(formState: FormState, formData: FormData) {
+  try {
+    const title = formData.get('title');
+    const code = formData.get('code');
 
-  console.log({ snippet });
+    if (typeof title !== 'string' || title.length < 3) {
+      return {
+        message: 'Title must be longer'
+      };
+    }
+
+    if (typeof code !== 'string' || code.length < 10) {
+      return {
+        message: 'Code must be longer'
+      };
+    }
+
+    await new Promise(r => setTimeout(r, 1500));
+    const snippet = await db.snippet.create({
+      data: { title, code }
+    });
+
+    console.log({ snippet });
+
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      return {
+        message: e.message
+      };
+    }
+
+    return {
+      message: 'Something went wrong'
+    };
+  }
 
   redirect('/');
 }
